@@ -34,15 +34,19 @@
   </div>
 <script>
   var THANK_YOU_URL = "https://wwc-oto.netlify.app/";
-  var FORM_ACTION = "https://assets.mailerlite.com/jsonp/2412476/forms/189574195741459772/subscribe";
+  var WORKER = "https://optin-subscribe.conorboyland.workers.dev";
+  // Groups this page adds people to: Newsletter + this magnet's group
+  var GROUPS = ["189561300354860354","189574183085147431"];
   document.getElementById('optin').addEventListener('submit', function(e){
     e.preventDefault();
-    var data = new FormData();
-    data.append('fields[email]', document.getElementById('email').value);
-    data.append('fields[name]', document.getElementById('name').value);
-    data.append('ml-submit','1');
-    data.append('anticsrf','true');
-    try { fetch(FORM_ACTION,{method:'POST',body:data,mode:'no-cors',keepalive:true}); } catch(e){}
+    var payload = {
+      email: document.getElementById('email').value,
+      name: document.getElementById('name').value,
+      groups: GROUPS
+    };
+    try {
+      fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+    } catch(e){}
     window.location.href = THANK_YOU_URL;
   });
 </script>
