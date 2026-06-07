@@ -14,8 +14,8 @@
   h1{font-size:30px;line-height:1.18;font-weight:800;letter-spacing:-0.01em;margin-bottom:14px;}
   .sub{font-size:17px;color:var(--muted);margin-bottom:28px;}
   form{display:flex;flex-direction:column;gap:12px}
-  input[type=email]{width:100%;padding:15px 16px;font-size:16px;border:1px solid var(--line);border-radius:10px;outline:none;}
-  input[type=email]:focus{border-color:var(--accent)}
+  input{width:100%;padding:15px 16px;font-size:16px;border:1px solid var(--line);border-radius:10px;outline:none;}
+  input:focus{border-color:var(--accent)}
   button{width:100%;padding:15px 16px;font-size:16px;font-weight:700;color:#fff;background:var(--accent);border:none;border-radius:10px;cursor:pointer;}
   .fine{margin-top:16px;font-size:13px;color:#9a9a9a;text-align:center;}
 </style>
@@ -24,8 +24,9 @@
   <div class="card">
     <div class="kicker">FREE DOWNLOAD</div>
     <h1 id="headline">The Test Magnet</h1>
-    <p class="sub" id="subhead">Drop your email and I'll send it straight to your inbox.</p>
+    <p class="sub" id="subhead">Drop your name and email and I'll send it straight to your inbox.</p>
     <form id="optin">
+      <input type="text" id="name" placeholder="Your first name" required autocomplete="given-name">
       <input type="email" id="email" placeholder="Your best email" required autocomplete="email">
       <button type="submit">Send it to me &rarr;</button>
     </form>
@@ -36,9 +37,9 @@
   var FORM_ACTION = "https://assets.mailerlite.com/jsonp/2412476/forms/189569679685060151/subscribe";
   document.getElementById('optin').addEventListener('submit', function(e){
     e.preventDefault();
-    var email = document.getElementById('email').value;
     var data = new FormData();
-    data.append('fields[email]', email);
+    data.append('fields[email]', document.getElementById('email').value);
+    data.append('fields[name]', document.getElementById('name').value);
     data.append('ml-submit','1');
     data.append('anticsrf','true');
     try { fetch(FORM_ACTION,{method:'POST',body:data,mode:'no-cors',keepalive:true}); } catch(e){}
