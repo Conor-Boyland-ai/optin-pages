@@ -38,9 +38,10 @@
   var GROUPS = ["189561300354860354","189649857823114303"];
   var MAGNET_TITLE = "How I Built a \"Second Brain\" for Claude";
   var MAGNET_URL = "https://conorboyland.substack.com/p/i-built-a-second-brain-for-claude";
+  var LEAD_SOURCE = "BRAIN";
   document.getElementById('optin').addEventListener('submit', function(e){
     e.preventDefault();
-    var payload = { email: document.getElementById('email').value, name: document.getElementById('name').value, groups: GROUPS, magnet_title: MAGNET_TITLE, magnet_url: MAGNET_URL };
+    var payload = { email: document.getElementById('email').value, name: document.getElementById('name').value, groups: GROUPS, magnet_title: MAGNET_TITLE, magnet_url: MAGNET_URL, lead_source: LEAD_SOURCE };
     try { fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true}); } catch(e){}
     window.location.href = THANK_YOU_URL;
   });
