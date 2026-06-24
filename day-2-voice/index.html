@@ -36,9 +36,12 @@
   var THANK_YOU_URL = "https://wwc-oto.netlify.app/";
   var WORKER = "https://optin-subscribe.conorboyland.workers.dev";
   var GROUPS = ["189561300354860354","189902295358506447"];
+  var MAGNET_TITLE = "How to Train Claude to Write in Your Voice";
+  var MAGNET_URL = "https://conorboyland.substack.com/p/i-spent-1000-hours-writing-with-claude";
+  var LEAD_SOURCE = "VOICE";
   document.getElementById('optin').addEventListener('submit', function(e){
     e.preventDefault();
-    var payload = { email: document.getElementById('email').value, name: document.getElementById('name').value, groups: GROUPS };
+    var payload = { email: document.getElementById('email').value, name: document.getElementById('name').value, groups: GROUPS, magnet_title: MAGNET_TITLE, magnet_url: MAGNET_URL, lead_source: LEAD_SOURCE };
     try { fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true}); } catch(e){}
     window.location.href = THANK_YOU_URL;
   });
